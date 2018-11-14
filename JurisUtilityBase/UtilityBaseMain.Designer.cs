@@ -386,7 +386,7 @@
             this.MinimizeBox = false;
             this.Name = "UtilityBaseMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Timekeeper Reassignment Utility";
+            this.Text = "Timekeeper Reassignment with Notecards Utility";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.JurisLogoImageBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LexisNexisLogoPictureBox)).EndInit();

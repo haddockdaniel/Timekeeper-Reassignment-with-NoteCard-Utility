@@ -605,13 +605,16 @@ namespace JurisUtilityBase
                     }
 
                     //add note
+                    DateTime dt = new DateTime();
+                    dt = DateTime.Today;
                     if (matterIDs.Any())
                     {
                         //update matter note card
                         List<string> currentList = matterIDs.Distinct().ToList();
+
                         foreach (string id in currentList)
                         {
-                            string CC2 = "insert into [MatterNote] ([MNMatter],[MNNoteIndex],[MNObject],[MNNoteText],[MNNoteObject]) values (" + id + ", 'Utility Update', '', 'Updated Timekeeper: " + typeOfTkpr + " changed from " + fromAtty + " to " + toAtty + "', null)";
+                            string CC2 = "insert into [MatterNote] ([MNMatter],[MNNoteIndex],[MNObject],[MNNoteText],[MNNoteObject]) values (" + id + ", 'Tkpr Change', '', 'Updated Timekeeper: " + typeOfTkpr + " changed from " + fromAtty + " to " + toAtty + " on " + dt.ToShortDateString() + "', null)";
                             _jurisUtility.ExecuteNonQueryCommand(0, CC2);
                         }
                     }
@@ -621,7 +624,7 @@ namespace JurisUtilityBase
                         List<string> currentList = clientIDs.Distinct().ToList();
                         foreach (string id in currentList)
                         {
-                            string CC2 = "insert into [ClientNote] ([CNClient],[CNNoteIndex],[CNObject],[CNNoteText],[CNNoteObject]) values (" + id + ", 'Utility Update', '', 'Updated Timekeeper: " + typeOfTkpr + " changed from " + fromAtty + " to " + toAtty + "', null)";
+                            string CC2 = "insert into [ClientNote] ([CNClient],[CNNoteIndex],[CNObject],[CNNoteText],[CNNoteObject]) values (" + id + ", 'Tkpr Change', '', 'Updated Timekeeper: " + typeOfTkpr + " changed from " + fromAtty + " to " + toAtty + " on " + dt.ToShortDateString() + "', null)";
                             _jurisUtility.ExecuteNonQueryCommand(0, CC2);
                         }
                     }
