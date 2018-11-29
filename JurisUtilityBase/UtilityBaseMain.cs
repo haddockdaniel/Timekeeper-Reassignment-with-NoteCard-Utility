@@ -611,10 +611,14 @@ namespace JurisUtilityBase
                     {
                         //update matter note card
                         List<string> currentList = matterIDs.Distinct().ToList();
-
+                        
                         foreach (string id in currentList)
                         {
-                            string CC2 = "insert into [MatterNote] ([MNMatter],[MNNoteIndex],[MNObject],[MNNoteText],[MNNoteObject]) values (" + id + ", 'Tkpr Change', '', 'Updated Timekeeper: " + typeOfTkpr + " changed from " + fromAtty + " to " + toAtty + " on " + dt.ToShortDateString() + "', null)";
+                            string noteIndex = "TkprChg";
+                            int results = findHowManyNotesAlreadySaytkprChange(true, id);
+                            if (results > 0)
+                                noteIndex = noteIndex + results.ToString();
+                            string CC2 = "insert into [MatterNote] ([MNMatter],[MNNoteIndex],[MNObject],[MNNoteText],[MNNoteObject]) values (" + id + ", '" + noteIndex + "', '', 'Updated Timekeeper: " + typeOfTkpr + " changed from " + fromAtty + " to " + toAtty + " on " + dt.ToShortDateString() + "', null)";
                             _jurisUtility.ExecuteNonQueryCommand(0, CC2);
                         }
                     }
@@ -622,10 +626,16 @@ namespace JurisUtilityBase
                     {
                         //update client note card
                         List<string> currentList = clientIDs.Distinct().ToList();
+                        
                         foreach (string id in currentList)
                         {
-                            string CC2 = "insert into [ClientNote] ([CNClient],[CNNoteIndex],[CNObject],[CNNoteText],[CNNoteObject]) values (" + id + ", 'Tkpr Change', '', 'Updated Timekeeper: " + typeOfTkpr + " changed from " + fromAtty + " to " + toAtty + " on " + dt.ToShortDateString() + "', null)";
+                            string noteIndex = "TkprChg";
+                            int results = findHowManyNotesAlreadySaytkprChange(false, id);
+                            if (results != 0)
+                                noteIndex = noteIndex + results.ToString();
+                            string CC2 = "insert into [ClientNote] ([CNClient],[CNNoteIndex],[CNObject],[CNNoteText],[CNNoteObject]) values (" + id + ", '" + noteIndex + "', '', 'Updated Timekeeper: " + typeOfTkpr + " changed from " + fromAtty + " to " + toAtty + " on " + dt.ToShortDateString() + "', null)";
                             _jurisUtility.ExecuteNonQueryCommand(0, CC2);
+
                         }
                     }
                     UpdateStatus("Timekeeper Update Complete", 5, 5);
@@ -651,6 +661,24 @@ namespace JurisUtilityBase
 
 
             }
+
+
+        private int findHowManyNotesAlreadySaytkprChange(bool isNoteMatter, string ID) //true is for matterNote, false is for clientNotes
+        {
+            DataSet ds = new DataSet();
+            string sql = "";
+            if (isNoteMatter)
+                sql = "select MNMatter from MatterNote where MNNoteIndex like 'TkprChg%' and MNMatter = " + ID;
+            else
+                sql = "select CNClient from ClientNote where CNNoteIndex like 'TkprChg%' and CNClient = " + ID;
+            ds = _jurisUtility.RecordsetFromSQL(sql);
+            if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
+                return 0;
+            else
+                return ds.Tables[0].Rows.Count;
+        }
+
+
 
         
         private void OCTkpr(int TkFrom, int TkTo)
@@ -934,6 +962,7 @@ namespace JurisUtilityBase
                 return false;
             }
         }
+
         private static bool IsNumeric(object Expression)
         {
             double retNum;

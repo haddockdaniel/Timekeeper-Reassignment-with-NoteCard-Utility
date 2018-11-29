@@ -114,15 +114,8 @@ C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Timekeeper Reassignment 
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Timekeeper Reassignment with NoteCard Utility\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecards.application
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Timekeeper Reassignment with NoteCard Utility\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecards.exe
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Timekeeper Reassignment with NoteCard Utility\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecards.pdb
-C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecards.exe.config
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\Interop.Microsoft.Office.Core.dll
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.ResolveComReference.cache
-C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecards.exe
-C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecards.pdb
-C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecards.exe.manifest
-C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecards.application
-C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecards.exe
-C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecards.pdb
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\C1.C1Report.4.dll
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\C1.Win.C1Input.4.dll
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\C1.Win.C1Report.4.dll
@@ -141,5 +134,12 @@ C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with N
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.Properties.Resources.resources
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.SplashScreen.resources
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.GenerateResource.Cache
-C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecards.exe.manifest
-C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecards.application
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecard.exe.config
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecard.exe.manifest
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecard.application
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecard.exe
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecard.pdb
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.exe.manifest
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.application
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.exe
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.pdb
