@@ -229,8 +229,6 @@ namespace JurisUtilityBase
                         {
                             string CM = "";
                             string CB = "";
-                            string MO = "";
-                            string MB = "";
                             string SQLCM = "select convert(varchar(10),count(corigatty),1) as CO from cliorigatty where corigatty=" + TkprSys.ToString();
                             DataSet myRSCM = _jurisUtility.RecordsetFromSQL(SQLCM);
                             if (myRSCM.Tables[0].Rows.Count == 0)
@@ -245,20 +243,6 @@ namespace JurisUtilityBase
                             else
                             { CB = myRSCB.Tables[0].Rows[0]["CO"].ToString(); }
 
-                            string SQLMO = "select convert(varchar(10),count(morigatty),1) as CO from matorigatty where morigatty=" + TkprSys.ToString();
-                            DataSet myRSMO = _jurisUtility.RecordsetFromSQL(SQLMO);
-                            if (myRSMO.Tables[0].Rows.Count == 0)
-                            { MO = "0"; }
-                            else
-                            { MO = myRSMO.Tables[0].Rows[0]["CO"].ToString(); }
-
-                            string SQLMB = "select convert(varchar(10),count(billtobillingatty),1) as CO from billto where billtobillingatty=" + TkprSys.ToString();
-                            DataSet myRSMB = _jurisUtility.RecordsetFromSQL(SQLMB);
-                            if (myRSMB.Tables[0].Rows.Count == 0)
-                            { MB = "0"; }
-                            else
-                            { MB = myRSMB.Tables[0].Rows[0]["CO"].ToString(); }
-
                             OCTkpr(TkprSys, TkprSys2);
 
                             OMTkpr(TkprSys, TkprSys2);
@@ -267,9 +251,13 @@ namespace JurisUtilityBase
 
                             BMTkpr(TkprSys, TkprSys2);
 
+                            RMTkpr(TkprSys, TkprSys2);
+
+                            RCTkpr(TkprSys, TkprSys2);
+
                             Cursor.Current = Cursors.Default;
                             Application.DoEvents();
-                            toolStripStatusLabel.Text = "Timekeepers Updated: Client Originating/Billing " + CM.ToString() + "/" + CB.ToString() + "; Matter Originating/Billing " + MO.ToString() + "/" + MB.ToString();
+                            toolStripStatusLabel.Text = "Timekeepers Updated: Client/Matter Originating/Billing/Responsible " + CM.ToString() + "/" + CB.ToString();
                             statusStrip.Refresh();
 
                         }
@@ -298,6 +286,8 @@ namespace JurisUtilityBase
 
                             BCTkpr(TkprSys, TkprSys2);
 
+                            RCTkpr(TkprSys, TkprSys2);
+
                             Cursor.Current = Cursors.Default;
                             Application.DoEvents();
                             toolStripStatusLabel.Text = "Timekeepers Updated: Client Originating/Billing " + CM.ToString() + "/" + CB.ToString();
@@ -325,11 +315,11 @@ namespace JurisUtilityBase
                             else
                             { MB = myRSMB.Tables[0].Rows[0]["CO"].ToString(); }
 
-
-
                             OMTkpr(TkprSys, TkprSys2);
 
                             BMTkpr(TkprSys, TkprSys2);
+
+                            RMTkpr(TkprSys, TkprSys2);
 
                             Cursor.Current = Cursors.Default;
                             Application.DoEvents();
@@ -338,36 +328,6 @@ namespace JurisUtilityBase
 
                         }
 
-                        if (rbResp.Checked)
-                        {
-                            string MO = "";
-                            string MB = "";
-                            string SQLMO = "select convert(varchar(10),count(mrtemployeeid),1) as CO from MatterResponsibleTimekeeper where mrtemployeeid=" + TkprSys.ToString();
-                            DataSet myRSMO = _jurisUtility.RecordsetFromSQL(SQLMO);
-                            if (myRSMO.Tables[0].Rows.Count == 0)
-                            { MO = "0"; }
-                            else
-                            { MO = myRSMO.Tables[0].Rows[0]["CO"].ToString(); }
-
-                            string SQLMB = "select convert(varchar(10),count(crtemployeeid),1) as CO from ClientResponsibleTimekeeper where crtemployeeid=" + TkprSys.ToString();
-                            DataSet myRSMB = _jurisUtility.RecordsetFromSQL(SQLMB);
-                            if (myRSMB.Tables[0].Rows.Count == 0)
-                            { MB = "0"; }
-                            else
-                            { MB = myRSMB.Tables[0].Rows[0]["CO"].ToString(); }
-
-
-
-                            RMTkpr(TkprSys, TkprSys2);
-
-                            RCTkpr(TkprSys, TkprSys2);
-
-                            Cursor.Current = Cursors.Default;
-                            Application.DoEvents();
-                            toolStripStatusLabel.Text = "Timekeepers Updated: Responsible Client/Matter " + MO.ToString() + "/" + MB.ToString();
-                            statusStrip.Refresh();
-
-                        }
 
                     }
 
@@ -638,6 +598,9 @@ namespace JurisUtilityBase
 
                         }
                     }
+                    clientIDs.Clear();
+                    matterIDs.Clear();
+                    typeOfTkpr = "";
                     UpdateStatus("Timekeeper Update Complete", 5, 5);
                     string LogNote = "Timekeeper Assignment - " + TkprSel.ToString().Trim() + " to " + TkprSel2.ToString().Trim();
                     WriteLog(LogNote.ToString());
@@ -845,7 +808,6 @@ namespace JurisUtilityBase
                 {
 
                     string Cli = row["Cli"].ToString();
-                    clientIDs.Add(Cli);
                     string OAtty = row["Corig"].ToString();
                     string Pct = row["Pct"].ToString();
 
@@ -857,7 +819,7 @@ namespace JurisUtilityBase
                         string CC = "delete from ClientResponsibleTimekeeper  where crtclientid=cast('" + Cli.ToString() + "' as int) and crtemployeeid=cast('" + TkFrom.ToString() + "' as int)";
                         _jurisUtility.ExecuteNonQueryCommand(0, CC);
 
-                        string CC2 = "update ClientResponsibleTimekeeper set corigpcnt = crtpercent + cast('" + Pct.ToString() + "' as decimal(7,4))  where crtclientid=cast('" + Cli.ToString() + "' as int) and crtemployeeid=cast('" + TkTo.ToString() + "' as int)";
+                        string CC2 = "update ClientResponsibleTimekeeper set CRTPercent = crtpercent + cast('" + Pct.ToString() + "' as decimal(7,4))  where crtclientid=cast('" + Cli.ToString() + "' as int) and crtemployeeid=cast('" + TkTo.ToString() + "' as int)";
                         _jurisUtility.ExecuteNonQueryCommand(0, CC2);
                         myRSCZ.Clear();
                     }
@@ -879,7 +841,7 @@ namespace JurisUtilityBase
             toolStripStatusLabel.Text = "Updating Matter Responsible Timekeepers....";
             statusStrip.Refresh();
             UpdateStatus("Matter Responsible Timekeepers", 2, 5);
-            string SQLCO = @"select cast(mrtmatterid as varchar(10)) as Cli, cast(morigatty as varchar(10)) as Corig, cast(morigpcnt as varchar(10)) as Pct from MatterResponsibleTimekeeper where morigatty=" + TkFrom.ToString();
+            string SQLCO = @"select cast(mrtmatterid as varchar(10)) as Cli, cast(MRTEmployeeID as varchar(10)) as Corig, cast(MRTPercent as varchar(10)) as Pct from MatterResponsibleTimekeeper where MRTEmployeeID=cast('" + TkFrom.ToString() + "' as int)";
             DataSet myRSCY = _jurisUtility.RecordsetFromSQL(SQLCO);
             if (myRSCY.Tables[0].Rows.Count != 0)
             {
@@ -887,11 +849,11 @@ namespace JurisUtilityBase
                 foreach (DataRow row in myRSCY.Tables[0].Rows)
                 {
                     string Cli = row["Cli"].ToString();
-                    matterIDs.Add(Cli);
                     string OAtty = row["Corig"].ToString();
                     string Pct = row["Pct"].ToString();
 
-                    string SQLCZM = @"select cast(mrtmatterid as varchar(10)) as Cli, cast(mrtemployeeid as varchar(10)) as Corig, cast(mrtpercent as varchar(10)) as Pct from mMatterResponsibleTimekeeper where mrtemployeeid=cast('" + TkTo.ToString() + "' as int) and mrtmatterid=cast('" + Cli.ToString() + "' as int)";
+
+                    string SQLCZM = @"select cast(mrtmatterid as varchar(10)) as Cli, cast(mrtemployeeid as varchar(10)) as Corig, cast(mrtpercent as varchar(10)) as Pct from MatterResponsibleTimekeeper where mrtemployeeid=cast('" + TkTo.ToString() + "' as int) and mrtmatterid=cast('" + Cli.ToString() + "' as int)";
                     DataSet myRSCX = _jurisUtility.RecordsetFromSQL(SQLCZM);
 
                     if (myRSCX.Tables[0].Rows.Count != 0)
