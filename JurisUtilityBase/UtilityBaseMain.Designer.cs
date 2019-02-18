@@ -56,12 +56,16 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.buttonReport = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioButtonNoteCardYes = new System.Windows.Forms.RadioButton();
+            this.radioButtonNoteCardNo = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.JurisLogoImageBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LexisNexisLogoPictureBox)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.statusGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // JurisLogoImageBox
@@ -216,7 +220,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.Navy;
             this.groupBox1.Location = new System.Drawing.Point(110, 187);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(561, 89);
+            this.groupBox1.Size = new System.Drawing.Size(421, 89);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Timekeeper Option";
@@ -238,7 +242,7 @@
             this.rbTkprOrig.AutoSize = true;
             this.rbTkprOrig.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbTkprOrig.ForeColor = System.Drawing.Color.Navy;
-            this.rbTkprOrig.Location = new System.Drawing.Point(382, 47);
+            this.rbTkprOrig.Location = new System.Drawing.Point(293, 47);
             this.rbTkprOrig.Name = "rbTkprOrig";
             this.rbTkprOrig.Size = new System.Drawing.Size(118, 20);
             this.rbTkprOrig.TabIndex = 2;
@@ -250,7 +254,7 @@
             this.rbTkprBill.AutoSize = true;
             this.rbTkprBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbTkprBill.ForeColor = System.Drawing.Color.Navy;
-            this.rbTkprBill.Location = new System.Drawing.Point(382, 21);
+            this.rbTkprBill.Location = new System.Drawing.Point(293, 21);
             this.rbTkprBill.Name = "rbTkprBill";
             this.rbTkprBill.Size = new System.Drawing.Size(90, 20);
             this.rbTkprBill.TabIndex = 1;
@@ -357,6 +361,45 @@
             this.buttonReport.UseVisualStyleBackColor = false;
             this.buttonReport.Click += new System.EventHandler(this.buttonReport_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.radioButtonNoteCardNo);
+            this.groupBox3.Controls.Add(this.radioButtonNoteCardYes);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.ForeColor = System.Drawing.Color.Navy;
+            this.groupBox3.Location = new System.Drawing.Point(543, 187);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(129, 89);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Add NoteCard?";
+            // 
+            // radioButtonNoteCardYes
+            // 
+            this.radioButtonNoteCardYes.AutoSize = true;
+            this.radioButtonNoteCardYes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonNoteCardYes.ForeColor = System.Drawing.Color.Navy;
+            this.radioButtonNoteCardYes.Location = new System.Drawing.Point(6, 21);
+            this.radioButtonNoteCardYes.Name = "radioButtonNoteCardYes";
+            this.radioButtonNoteCardYes.Size = new System.Drawing.Size(50, 20);
+            this.radioButtonNoteCardYes.TabIndex = 4;
+            this.radioButtonNoteCardYes.Text = "Yes";
+            this.radioButtonNoteCardYes.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonNoteCardNo
+            // 
+            this.radioButtonNoteCardNo.AutoSize = true;
+            this.radioButtonNoteCardNo.Checked = true;
+            this.radioButtonNoteCardNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonNoteCardNo.ForeColor = System.Drawing.Color.Navy;
+            this.radioButtonNoteCardNo.Location = new System.Drawing.Point(6, 47);
+            this.radioButtonNoteCardNo.Name = "radioButtonNoteCardNo";
+            this.radioButtonNoteCardNo.Size = new System.Drawing.Size(44, 20);
+            this.radioButtonNoteCardNo.TabIndex = 5;
+            this.radioButtonNoteCardNo.TabStop = true;
+            this.radioButtonNoteCardNo.Text = "No";
+            this.radioButtonNoteCardNo.UseVisualStyleBackColor = true;
+            // 
             // UtilityBaseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -364,6 +407,7 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(683, 411);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.buttonReport);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
@@ -398,6 +442,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -432,6 +478,9 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button buttonReport;
         private System.Windows.Forms.RadioButton rbResp;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radioButtonNoteCardNo;
+        private System.Windows.Forms.RadioButton radioButtonNoteCardYes;
     }
 }
 
