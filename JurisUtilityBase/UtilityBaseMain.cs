@@ -100,7 +100,7 @@ namespace JurisUtilityBase
 
             string TkprIndex;
             cbFrom.ClearItems();
-            string SQLTkpr = "select empinitials + case when len(empinitials)=1 then '     ' when len(empinitials)=2 then '     ' when len(empinitials)=3 then '   ' else '  ' end +  empname as employee from employee where empvalidastkpr='Y' and (empsysnbr in (select billtobillingatty from billto) or empsysnbr in (select morigatty from matorigatty) or empsysnbr in (select clibillingatty from client) or empsysnbr in (select corigatty from cliorigatty)) order by empinitials";
+            string SQLTkpr = "select empid + case when len(empid)=1 then '     ' when len(empid)=2 then '     ' when len(empid)=3 then '   ' else '  ' end +  empname as employee from employee where empvalidastkpr='Y' and (empsysnbr in (select distinct billtobillingatty from billto) or empsysnbr in (select distinct morigatty from matorigatty) or empsysnbr in (select distinct clibillingatty from client) or empsysnbr in (select distinct corigatty from cliorigatty)) order by empid";
             DataSet myRSTkpr = _jurisUtility.RecordsetFromSQL(SQLTkpr);
 
             if (myRSTkpr.Tables[0].Rows.Count == 0)
@@ -121,7 +121,7 @@ namespace JurisUtilityBase
 
             string TkprIndex2;
             cbTo.ClearItems();
-            string SQLTkpr2 = "select empinitials + case when len(empinitials)=1 then '     ' when len(empinitials)=2 then '     ' when len(empinitials)=3 then '   ' else '  ' end +  empname as employee from employee where empvalidastkpr='Y' order by empinitials";
+            string SQLTkpr2 = "select empid + case when len(empid)=1 then '     ' when len(empid)=2 then '     ' when len(empid)=3 then '   ' else '  ' end +  empname as employee from employee where empvalidastkpr='Y' and (empsysnbr in (select distinct billtobillingatty from billto) or empsysnbr in (select distinct morigatty from matorigatty) or empsysnbr in (select distinct clibillingatty from client) or empsysnbr in (select distinct corigatty from cliorigatty)) order by empid";
             DataSet myRSTkpr2 = _jurisUtility.RecordsetFromSQL(SQLTkpr2);
 
 
@@ -164,7 +164,7 @@ namespace JurisUtilityBase
             { MessageBox.Show("Invalid Timekeeper. Please check your selections and try again."); }
             else
             {
-                string SQLTkpr = "select empsysnbr as Tkpr from employee where empinitials like '%' + '" + TkprSel.ToString().Trim() + "'";
+                string SQLTkpr = "select empsysnbr as Tkpr from employee where empid = '" + TkprSel.ToString().Trim() + "'";
                 DataSet myRSTkpr = _jurisUtility.RecordsetFromSQL(SQLTkpr);
                 if (myRSTkpr.Tables[0].Rows.Count == 0)
                 { MessageBox.Show("Invalid Timekeeper. Please check your selections and try again."); }
@@ -186,7 +186,7 @@ namespace JurisUtilityBase
                 { MessageBox.Show("Invalid Timekeeper. Please check your selections and try again."); }
                 else
                 {
-                    string SQLTkpr2 = "select empsysnbr as Tkpr from employee where empinitials like '%' + '" + TkprSel2.ToString().Trim() + "'";
+                    string SQLTkpr2 = "select empsysnbr as Tkpr from employee where empid = '" + TkprSel2.ToString().Trim() + "'";
                     DataSet myRSTkpr2 = _jurisUtility.RecordsetFromSQL(SQLTkpr2);
                     if (myRSTkpr2.Tables[0].Rows.Count == 0)
                     { MessageBox.Show("Invalid Timekeeper. Please check your selections and try again."); }
@@ -367,7 +367,7 @@ namespace JurisUtilityBase
 
                         }
 
-                        if (rbClient.Checked)
+                        else if (rbClient.Checked)
                         {
                             string CB = "";
                             string SQLCB = "select convert(varchar(10),count(clibillingatty),1) as CO from client where clibillingatty=" + TkprSys.ToString();
@@ -385,7 +385,7 @@ namespace JurisUtilityBase
                             statusStrip.Refresh();
                         }
 
-                        if (rbMatter.Checked)
+                        else if (rbMatter.Checked)
                         {
                             string MB = "";
                             string SQLMB = "select convert(varchar(10),count(billtobillingatty),1) as CO from billto where billtobillingatty=" + TkprSys.ToString();
@@ -620,7 +620,7 @@ namespace JurisUtilityBase
                         ReportDisplay rpds = new ReportDisplay(ds);
                         rpds.Show();
                     }
-
+                    
                 }
 
 
@@ -745,6 +745,7 @@ namespace JurisUtilityBase
 
         private void BMTkpr(int TkFrom, int TkTo)
         {
+
             Cursor.Current = Cursors.WaitCursor;
             Application.DoEvents();
             toolStripStatusLabel.Text = "Updating Matter Billing Timekeepers....";
@@ -1075,22 +1076,22 @@ namespace JurisUtilityBase
             string reportSQL = "";
             //if matter and billing timekeeper
             if (rbTkprBill.Checked && rbMatter.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,empinitials as CurrentBillingTimekeeper, '" + toAtty + "' as NewBillingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,empid as CurrentBillingTimekeeper, '" + toAtty + "' as NewBillingTimekeeper" +
                         " from matter" +
                         " inner join client on matclinbr=clisysnbr" +
                         " inner join billto on matbillto=billtosysnbr" +
                         " inner join employee on empsysnbr=billtobillingatty" +
-                        " where empinitials='" + fromAtty + "'";
+                        " where empid='" + fromAtty + "'";
 
 
             //if matter and originating timekeeper
             else if (rbMatter.Checked && rbTkprOrig.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,empinitials as CurrentOriginatingTimekeeper, '" + toAtty + "' as NewOriginatingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,empid as CurrentOriginatingTimekeeper, '" + toAtty + "' as NewOriginatingTimekeeper" +
                     " from matter" +
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join matorigatty on matsysnbr=morigmat" +
                     " inner join employee on empsysnbr=morigatty" +
-                    " where empinitials='" + fromAtty + "'";
+                    " where empid='" + fromAtty + "'";
 
             //if matter and responsible
             else if (rbMatter.Checked && rbResp.Checked)
@@ -1099,7 +1100,7 @@ namespace JurisUtilityBase
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join MatterResponsibleTimekeeper on matsysnbr=mrtmatterid" +
                     " inner join employee on empsysnbr=mrtemployeeid" +
-                    " where empinitials='" + fromAtty + "'";
+                    " where empid='" + fromAtty + "'";
 
             //if client and responsible
             else if (rbClient.Checked && rbResp.Checked)
@@ -1108,59 +1109,59 @@ namespace JurisUtilityBase
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join ClientResponsibleTimekeeper on CliSysNbr=crtclientid" +
                     " inner join employee on empsysnbr=crtemployeeid" +
-                    " where empinitials='" + fromAtty + "'";
+                    " where empid='" + fromAtty + "'";
 
             //if client and billing timekeeper
             else if (rbTkprBill.Checked && rbClient.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, empinitials as CurrentBillingTimekeeper,   '" + toAtty + "' as NewBillingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, empid as CurrentBillingTimekeeper,   '" + toAtty + "' as NewBillingTimekeeper" +
                     " from  client" +
                     " inner join employee on empsysnbr=clibillingatty" +
-                    " where empinitials='" + fromAtty + "'";
+                    " where empid='" + fromAtty + "'";
 
             //if client  and originating timekeeper
             else if (rbClient.Checked && rbTkprOrig.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, empinitials as CurrentOriginatingTimekeeper,  '" + toAtty + "' as NewOriginatingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, empid as CurrentOriginatingTimekeeper,  '" + toAtty + "' as NewOriginatingTimekeeper" +
                     " from  client" +
                     " inner join cliorigatty on corigcli=clisysnbr" +
                     " inner join employee on empsysnbr=corigatty" +
-                    " where empinitials='" + fromAtty + "'";
+                    " where empid='" + fromAtty + "'";
 
 
             //if client & matter....and billing
             else if (rbCM.Checked && rbTkprBill.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matBill.empinitials as MatterBillingTimekeeper, cliBill.empinitials as ClientBillingTimekeeper, '" + toAtty + "' as NewBillingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matBill.empid as MatterBillingTimekeeper, cliBill.empid as ClientBillingTimekeeper, '" + toAtty + "' as NewBillingTimekeeper" +
                         " from matter" +
                         " inner join client on matclinbr=clisysnbr" +
                         " inner join billto on matbillto=billtosysnbr" +
                         " inner join employee matBill on matBill.empsysnbr=billto.billtobillingatty" +
                         " inner join employee cliBill on cliBill.empsysnbr=client.clibillingatty" +
-                        " where cliBill.empinitials='" + fromAtty + "' or matBill.empinitials ='" + fromAtty + "'";
+                        " where cliBill.empid='" + fromAtty + "' or matBill.empid ='" + fromAtty + "'";
 
                 //if client & matter....and originating
             else if (rbCM.Checked && rbTkprOrig.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matOrig.empinitials as MatterOriginatingTimekeeper,  cliOrig.empinitials as ClientOriginatingTimekeeper, '" + toAtty + "' as NewOriginatingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matOrig.empid as MatterOriginatingTimekeeper,  cliOrig.empid as ClientOriginatingTimekeeper, '" + toAtty + "' as NewOriginatingTimekeeper" +
                     " from matter" +
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join matorigatty on matsysnbr=morigmat" +
                     " inner join cliorigatty on corigcli=clisysnbr" +
                     " inner join employee matOrig on matOrig.empsysnbr=morigatty" +
                     " inner join employee cliOrig on cliOrig.empsysnbr=corigatty" +
-                    " where matOrig.empinitials='" + fromAtty + "' or cliOrig.empinitials ='" + fromAtty + "'";
+                    " where matOrig.empid='" + fromAtty + "' or cliOrig.empid ='" + fromAtty + "'";
                 //if client & matter...and Responsible
             else if (rbCM.Checked && rbResp.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matOrig.empinitials as MatterResponsibleTimekeeper,  cliOrig.empinitials as ClientResponsibleTimekeeper, '" + toAtty + "' as NewResponsibleTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matOrig.empid as MatterResponsibleTimekeeper,  cliOrig.empid as ClientResponsibleTimekeeper, '" + toAtty + "' as NewResponsibleTimekeeper" +
                     " from matter" +
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join MatterResponsibleTimekeeper on matsysnbr=mrtmatterid" +
                     " inner join ClientResponsibleTimekeeper on crtclientid=clisysnbr" +
                     " inner join employee matOrig on matOrig.empsysnbr=mrtemployeeid" +
                     " inner join employee cliOrig on cliOrig.empsysnbr=crtemployeeid" +
-                    " where matOrig.empinitials='" + fromAtty + "' or cliOrig.empinitials ='" + fromAtty + "'";
+                    " where matOrig.empid='" + fromAtty + "' or cliOrig.empid ='" + fromAtty + "'";
 
 
             //if client & matter.....and All
             else if (rbCM.Checked && rbAll.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matOrig.empinitials as MatterOriginatingTimekeeper,  cliOrig.empinitials as ClientOriginatingTimekeeper,matBill.empinitials as MatterBillingTimekeeper,  cliBill.empinitials as ClientBillingTimekeeper, matResp.empinitials as MatterResponsibleTimekeeper,  cliResp.empinitials as ClientResponsibleTimekeeper, '" + toAtty + "' as NewTimekeeperForAll" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matOrig.empid as MatterOriginatingTimekeeper,  cliOrig.empid as ClientOriginatingTimekeeper,matBill.empid as MatterBillingTimekeeper,  cliBill.empid as ClientBillingTimekeeper, matResp.empid as MatterResponsibleTimekeeper,  cliResp.empid as ClientResponsibleTimekeeper, '" + toAtty + "' as NewTimekeeperForAll" +
                     " from matter" +
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join matorigatty on matsysnbr=morigmat" +
@@ -1174,9 +1175,9 @@ namespace JurisUtilityBase
                     " inner join employee cliBill on cliBill.empsysnbr=client.clibillingatty" +
                     " left outer join employee matResp on matResp.empsysnbr=mrtemployeeid" +
                     " left outer join employee cliResp on cliResp.empsysnbr=crtemployeeid" +
-                    " where matOrig.empinitials='" + fromAtty + "' or cliOrig.empinitials ='" + fromAtty + "'" +
-                    "or matBill.empinitials='" + fromAtty + "' or cliBill.empinitials ='" + fromAtty + "'" + 
-                    "or matResp.empinitials='" + fromAtty + "' or cliResp.empinitials ='" + fromAtty + "'";
+                    " where matOrig.empid='" + fromAtty + "' or cliOrig.empid ='" + fromAtty + "'" +
+                    " or matBill.empid='" + fromAtty + "' or cliBill.empid ='" + fromAtty + "'" + 
+                    " or matResp.empid='" + fromAtty + "' or cliResp.empid ='" + fromAtty + "'";
 
             return reportSQL;
         }
@@ -1186,22 +1187,22 @@ namespace JurisUtilityBase
             string reportSQL = "";
             //if matter and billing timekeeper
             if (rbTkprBill.Checked && rbMatter.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,empinitials as CurrentBillingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,empid as CurrentBillingTimekeeper" +
                         " from matter" +
                         " inner join client on matclinbr=clisysnbr" +
                         " inner join billto on matbillto=billtosysnbr" +
                         " inner join employee on empsysnbr=billtobillingatty" +
-                        " where empinitials='" + toAtty + "'";
+                        " where empid='" + toAtty + "'";
 
 
             //if matter and originating timekeeper
             else if (rbMatter.Checked && rbTkprOrig.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,empinitials as CurrentOriginatingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,empid as CurrentOriginatingTimekeeper" +
                     " from matter" +
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join matorigatty on matsysnbr=morigmat" +
                     " inner join employee on empsysnbr=morigatty" +
-                    " where empinitials='" + toAtty + "'";
+                    " where empid='" + toAtty + "'";
 
                             //if matter and responsible
             else if (rbMatter.Checked && rbResp.Checked)
@@ -1210,7 +1211,7 @@ namespace JurisUtilityBase
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join MatterResponsibleTimekeeper on matsysnbr=mrtmatterid" +
                     " inner join employee on empsysnbr=mrtemployeeid" +
-                    " where empinitials='" + toAtty + "'";
+                    " where empid='" + toAtty + "'";
 
             //if client and responsible
             else if (rbClient.Checked && rbResp.Checked)
@@ -1219,48 +1220,48 @@ namespace JurisUtilityBase
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join ClientResponsibleTimekeeper on CliSysNbr=crtclientid" +
                     " inner join employee on empsysnbr=crtemployeeid" +
-                    " where empinitials='" + toAtty + "'";
+                    " where empid='" + toAtty + "'";
 
             //if client and billing timekeeper
             else if (rbTkprBill.Checked && rbClient.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, empinitials as CurrentBillingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, empid as CurrentBillingTimekeeper" +
                     " from  client" +
                     " inner join employee on empsysnbr=clibillingatty" +
-                    " where empinitials='" + toAtty + "'";
+                    " where empid='" + toAtty + "'";
 
             //if client  and originating timekeeper
             else if (rbClient.Checked && rbTkprOrig.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, empinitials as CurrentOriginatingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, empid as CurrentOriginatingTimekeeper" +
                     " from  client" +
                     " inner join cliorigatty on corigcli=clisysnbr" +
                     " inner join employee on empsysnbr=corigatty" +
-                    " where empinitials='" + toAtty + "'";
+                    " where empid='" + toAtty + "'";
 
 
             //if client & matter....and billing
             else if (rbCM.Checked && rbTkprBill.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matBill.empinitials as MatterBillingTimekeeper, cliBill.empinitials as ClientBillingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matBill.empid as MatterBillingTimekeeper, cliBill.empid as ClientBillingTimekeeper" +
                         " from matter" +
                         " inner join client on matclinbr=clisysnbr" +
                         " inner join billto on matbillto=billtosysnbr" +
                         " inner join employee matBill on matBill.empsysnbr=billto.billtobillingatty" +
                         " inner join employee cliBill on cliBill.empsysnbr=client.clibillingatty" +
-                        " where cliBill.empinitials='" + toAtty + "' or matBill.empinitials ='" + toAtty + "'";
+                        " where cliBill.empid='" + toAtty + "' or matBill.empid ='" + toAtty + "'";
 
                 //if client & matter....and originating
             else if (rbCM.Checked && rbTkprOrig.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matOrig.empinitials as MatterOriginatingTimekeeper,  cliOrig.empinitials as ClientOriginatingTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matOrig.empid as MatterOriginatingTimekeeper,  cliOrig.empid as ClientOriginatingTimekeeper" +
                     " from matter" +
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join matorigatty on matsysnbr=morigmat" +
                     " inner join cliorigatty on corigcli=clisysnbr" +
                     " inner join employee matOrig on matOrig.empsysnbr=morigatty" +
                     " inner join employee cliOrig on cliOrig.empsysnbr=corigatty" +
-                    " where matOrig.empinitials='" + toAtty + "' or cliOrig.empinitials ='" + toAtty + "'";
+                    " where matOrig.empid='" + toAtty + "' or cliOrig.empid ='" + toAtty + "'";
 
             //if client & matter.....and All
             else if (rbCM.Checked && rbAll.Checked)
-                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matOrig.empinitials as MatterOriginatingTimekeeper,  cliOrig.empinitials as ClientOriginatingTimekeeper,matBill.empinitials as MatterBillingTimekeeper,  cliBill.empinitials as ClientBillingTimekeeper, matResp.empinitials as MatterResponsibleTimekeeper,  cliResp.empinitials as ClientResponsibleTimekeeper" +
+                reportSQL = "select Clicode as ClientCode, Clireportingname as ClientName, Matcode as MatterCode, Matreportingname as MatterName,matOrig.empid as MatterOriginatingTimekeeper,  cliOrig.empid as ClientOriginatingTimekeeper,matBill.empid as MatterBillingTimekeeper,  cliBill.empid as ClientBillingTimekeeper, matResp.empid as MatterResponsibleTimekeeper,  cliResp.empid as ClientResponsibleTimekeeper" +
                     " from matter" +
                     " inner join client on matclinbr=clisysnbr" +
                     " inner join matorigatty on matsysnbr=morigmat" +
@@ -1274,9 +1275,9 @@ namespace JurisUtilityBase
                     " inner join employee cliBill on cliBill.empsysnbr=client.clibillingatty" +
                     " left outer join employee matResp on matResp.empsysnbr=mrtemployeeid" +
                     " left outer join employee cliResp on cliResp.empsysnbr=crtemployeeid" +
-                    " where matOrig.empinitials='" + toAtty + "' or cliOrig.empinitials ='" + toAtty + "'" +
-                    "or matBill.empinitials='" + toAtty + "' or cliBill.empinitials ='" + toAtty + "'" +
-                    "or matResp.empinitials='" + toAtty + "' or cliResp.empinitials ='" + toAtty + "'";
+                    " where matOrig.empid='" + toAtty + "' or cliOrig.empid ='" + toAtty + "'" +
+                    " or matBill.empid='" + toAtty + "' or cliBill.empid ='" + toAtty + "'" +
+                    " or matResp.empid='" + toAtty + "' or cliResp.empid ='" + toAtty + "'";
 
             return reportSQL;
         }

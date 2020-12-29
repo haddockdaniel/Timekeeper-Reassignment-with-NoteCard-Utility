@@ -143,3 +143,34 @@ C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with N
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.application
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.exe
 C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.pdb
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecard.exe.config
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\Interop.Microsoft.Office.Core.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.ResolveComReference.cache
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.exe
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.pdb
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csprojAssemblyReference.cache
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.PrinterDialog.resources
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.ReportDisplay.resources
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.UtilityBaseMain.resources
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.Properties.Resources.resources
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.SplashScreen.resources
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.GenerateResource.cache
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CoreCompileInputs.cache
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecard.exe.manifest
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecard.application
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecard.exe
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\TimekeeperReassignmentWithNotecard.pdb
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\C1.C1Report.4.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\C1.Win.C1Input.4.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\C1.Win.C1Report.4.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\Gizmox.Extensions.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\Ionic.Zlib.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\JurisAuthenticator.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\JurisDBO21.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\JurisIDef21.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\JurisStr21.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\JurisStr221.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\bin\x86\Release\JurisSVR21.dll
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.exe.manifest
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\TimekeeperReassignmentWithNotecard.application
+D:\Projects\Tkpr Reassignment with NoteCard\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CopyComplete
