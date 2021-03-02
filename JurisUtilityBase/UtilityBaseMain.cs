@@ -395,7 +395,6 @@ namespace JurisUtilityBase
                             else
                             { MB = myRSMB.Tables[0].Rows[0]["CO"].ToString(); }
 
-                            OMTkpr(TkprSys, TkprSys2);
                             BMTkpr(TkprSys, TkprSys2);
 
                             Cursor.Current = Cursors.Default;
